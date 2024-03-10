@@ -83,7 +83,7 @@ const handleAccountChanged = async (accountNo, setAccount, setChainId, setNfts, 
         method: "GET",
         headers: {
           // Authorization: process.env.AIRTABLE_API_KEY, //AirTableのAPIキー
-          Authorization: "Bearer pat03Tla2ix8YDjUG",//AirTableのAPIキー書き換え（旧：keypjfrOALL1xCF3r）
+          Authorization: "Bearer pat03Tla2ix8YDjUG.fb25c1823ec93914194e26699728d0c10923bdb68aa71fc7301a059bdf5990d7",//AirTableのAPIキー書き換え（旧：keypjfrOALL1xCF3r）
         },
       };
       const resTokenInfo = await fetch(
@@ -367,7 +367,7 @@ const handleSubmit = async (account, nft, chainName, size, otherSize, handleClos
     await contract.erc1155.transfer(walletAddress, tokenId, amount);
 
     const headers = {
-      Authorization: "Bearer pat03Tla2ix8YDjUG", //AirTableのAPIキー//AirTableのAPIキー書き換え（旧：keypjfrOALL1xCF3r）
+      Authorization: "Bearer pat03Tla2ix8YDjUG.fb25c1823ec93914194e26699728d0c10923bdb68aa71fc7301a059bdf5990d7", //AirTableのAPIキー//AirTableのAPIキー書き換え（旧：keypjfrOALL1xCF3r）
       "Content-Type": "application/json",
     };
     const method = "POST";
