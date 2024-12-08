@@ -95,8 +95,46 @@ firebase deploy
 2. 所有するNFTの一覧が表示される
 3. 交換したいNFTを選択
 4. 配送情報フォームに必要事項を入力
+   - 通常の商品：基本配送情報のみ
+   - Tシャツ：サイズ選択を含む追加情報
 5. MetaMaskで取引を承認
 6. NFTが管理者ウォレットに転送され、商品発送手続きが開始
+
+## オリジナルTシャツ交換システム
+
+NFTコレクションの中でも、特定のTシャツ交換用NFTについては、以下の特別な仕様が実装されています：
+
+### サイズ選択システム
+
+商品交換時に、以下のサイズオプションから選択できます：
+- 標準サイズ：S、M、L、XL
+- カスタムサイズ：「その他」オプションで自由入力可能
+
+### 対象NFT
+以下のKey IDを持つNFTがTシャツ交換の対象となります：
+- rec65kFu48ut5GPhC
+- recB1VbiT6bR7TMnH
+- recqCurt5f435BcVf
+- recj2JF2UnJU2ixXw
+- reclz4Dg5QS8VnJZ0
+- recyBnzU9IzYtJuCT
+- recK0sK8Hzq6ffghW
+- recs6Mdq8UFgEjpPD
+- recjmIXtdNbAdMQnd
+- rec5noihUnn4JYDeV
+- recCafjYmJ2gX9K0l
+- reclxuPXKWLkCjmVE
+
+### データ管理
+選択されたサイズ情報は以下の形式でAirTableに保存されます：
+- Size: 標準サイズ（S/M/L/XL）の選択値
+- Size_Other: カスタムサイズの入力値
+
+### 使用方法
+1. 対象のTシャツNFTを選択
+2. フォームにて配送情報を入力
+3. 希望のサイズを選択（標準サイズまたはカスタム）
+4. 入力内容を確認して申し込みを実行
 
 ## セキュリティ考慮事項
 
