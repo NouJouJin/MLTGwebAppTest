@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# MetagriLabo Thanks Gift (MLTG) Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+このプロジェクトは、NFTを活用したデジタル商品交換システムを実装したWebアプリケーションです。MetaMaskウォレットと連携し、ユーザーが所有するNFTを実物商品と交換できる機能を提供します。
 
-## Available Scripts
+## 機能概要
 
-In the project directory, you can run:
+このアプリケーションは以下の主要機能を提供します：
 
-### `npm start`
+- MetaMaskウォレットとの連携による認証
+- NFTコレクションの表示と管理
+- NFTを使用した商品交換システム
+- マルチチェーンサポート（Ethereum、Goerli、Polygon、Mumbai）
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## プロジェクト構造
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+MLTGwebApp/
+├── .env                 # 環境変数設定ファイル
+├── .firebase/          # Firebaseデプロイメント設定
+├── .firebaserc         # Firebase設定ファイル
+├── firebase.json       # Firebaseプロジェクト設定
+├── package.json        # プロジェクト依存関係と設定
+├── public/            # 静的ファイルディレクトリ
+└── src/               # ソースコードディレクトリ
+    ├── App.js         # メインアプリケーションコンポーネント
+    ├── App.css        # アプリケーションスタイル
+    ├── index.js       # アプリケーションエントリーポイント
+    └── images/        # 画像ファイルディレクトリ
+```
 
-### `npm test`
+## 主要ファイルの説明
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### App.js
+メインのアプリケーションロジックを含むファイルです。以下の機能を実装しています：
+- MetaMaskとの接続管理
+- NFTコレクションの取得と表示
+- 商品交換フォームの処理
+- Web3トランザクションの実行
+- AirTableとの連携
 
-### `npm run build`
+### package.json
+プロジェクトの依存関係を管理します。主要な依存パッケージ：
+- @thirdweb-dev/react: NFT機能の実装
+- @thirdweb-dev/sdk: Web3開発用SDK
+- ethers: Ethereum開発ライブラリ
+- react-bootstrap: UIコンポーネント
+- react-router-dom: ルーティング
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### .env
+環境変数を管理するファイルです。現在の設定：
+- GENERATE_SOURCEMAP: ソースマップ生成の制御
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### firebase.json
+Firebaseのホスティング設定を管理します。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 技術スタック
 
-### `npm run eject`
+- フロントエンド: React.js
+- UI Framework: React Bootstrap
+- Web3連携: ThirdWeb SDK, ethers.js
+- ウォレット連携: MetaMask
+- データベース: AirTable
+- ホスティング: Firebase
+- 画像ストレージ: IPFS
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## セットアップと開発
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+開発環境のセットアップ:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# 依存関係のインストール
+npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# 開発サーバーの起動
+npm start
 
-## Learn More
+# プロダクションビルド
+npm run build
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Firebaseへのデプロイ
+firebase deploy
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 必要な環境変数
 
-### Code Splitting
+本番環境では以下の環境変数の設定が必要です：
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- AIRTABLE_API_KEY: AirTableへのアクセスキー
+- WEB3_API_KEY: ThirdWebのAPIキー
+- MORALIS_API_KEY: MoralisのAPIキー
 
-### Analyzing the Bundle Size
+## NFT商品交換の流れ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. ユーザーがMetaMaskでウォレットを接続
+2. 所有するNFTの一覧が表示される
+3. 交換したいNFTを選択
+4. 配送情報フォームに必要事項を入力
+5. MetaMaskで取引を承認
+6. NFTが管理者ウォレットに転送され、商品発送手続きが開始
 
-### Making a Progressive Web App
+## セキュリティ考慮事項
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- MetaMask認証による安全なトランザクション
+- 環境変数による機密情報の保護
+- Web3 APIキーによるアクセス制御
+- AirTableとの安全な連携
 
-### Advanced Configuration
+## 注意事項
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- 本システムはテストネットでの利用を推奨します
+- 実際の商品交換には管理者の承認が必要です
+- NFTの転送には適切なガス代が必要です
 
-### Deployment
+## 貢献
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+プロジェクトへの貢献を歓迎します。プルリクエストを送る前に以下をご確認ください：
+- コードスタイルガイドラインの遵守
+- テストの実施
+- ドキュメントの更新
 
-### `npm run build` fails to minify
+## ライセンス
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## 開発者向け情報
+
+- API仕様書は`/docs`フォルダを参照してください
+- 開発環境の構築手順は`CONTRIBUTING.md`を参照してください
