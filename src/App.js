@@ -28,6 +28,8 @@ const chainIdList = [
   { id: 5, name: "goerli" },
   { id: 137, name: "polygon" },
   { id: 80001, name: "mumbai" },
+  { id: 84532, name: "Base Sepolia" },
+  { id: 8453, name: "Base" },
 ];
 
 const getAccount = async () => {
