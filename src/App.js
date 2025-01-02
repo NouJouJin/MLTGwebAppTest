@@ -63,7 +63,7 @@ const handleAccountChanged = async (accountNo, setAccount, setChainId, setNfts, 
   setChainName(chainName);
 
   console.log(process.env.WEB3_API_KEY); //thirdwebのAPIキー
-  const web3ApiKey = "uhLjLGW17H6xB1OxUtYRwz3O37P669YncgUETfC1z3JVqPMoRqexUsYaZgjMoTmY";
+  const web3ApiKey = process.env.REACT_APP_MORALIS_API_KEY;
   const options = {
     method: "GET",
     headers: {
@@ -72,7 +72,7 @@ const handleAccountChanged = async (accountNo, setAccount, setChainId, setNfts, 
     },
   };
 
-  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2/${account}/nft?chain=${chainName}`, options);
+  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=${chainName}`, options); //v2.2に更新
   const resNft = await resNftData.json();
   console.log(JSON.stringify(resNft));
 
@@ -159,7 +159,7 @@ const handleCollectonSelect = async (chainName, setSelectedCollection, setSelect
     },
   };
 
-  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2/nft/${selectedCollection}?chain=${chainName}&format=decimal`, options);
+  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2.2/nft/${selectedCollection}?chain=${chainName}&format=decimal`, options); //v2.2に更新
   const resNft = await resNftData.json();
   let nfts = [];
   for (let nft of resNft.result) {
