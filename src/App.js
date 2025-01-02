@@ -72,7 +72,18 @@ const handleAccountChanged = async (accountNo, setAccount, setChainId, setNfts, 
     },
   };
 
-  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=${chainName}`, options); //v2.2に更新
+  //修正箇所
+  try {
+  const resNftData = await fetch(`https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=${chainName}`, options);
+  if (!resNftData.ok) {
+    throw new Error(`HTTP error! Status: ${resNftData.status}`);
+  }
+  const resNft = await resNftData.json();
+  console.log(JSON.stringify(resNft));
+} catch (error) {
+  console.error('Fetch error:', error);
+}
+  //const resNftData = await fetch(`https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=${chainName}`, options); //v2.2に更新
   const resNft = await resNftData.json();
   console.log(JSON.stringify(resNft));
 
