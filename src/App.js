@@ -1,4 +1,5 @@
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider, walletConnect } from "@thirdweb-dev/react";
+import { ConnectWallet } from "@thirdweb-dev/react"; // ConnectWallet コンポーネントもインポート
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
@@ -24,12 +25,12 @@ import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import Tooltip from "react-bootstrap/esm/Tooltip";
 
 const chainIdList = [
-  { id: 1, name: "eth" },
-  { id: 5, name: "goerli" },
-  { id: 137, name: "polygon" },
-  { id: 80001, name: "mumbai" },
-  { id: 84532, name: "Base Sepolia" },
-  { id: 8453, name: "Base" },
+  { id: 1, name: "eth", hex: "0x1" },
+  { id: 5, name: "goerli", hex: "0x5" },
+  { id: 137, name: "polygon", hex: "0x89" },
+  { id: 80001, name: "mumbai", hex: "0x13881" },
+  { id: 84532, name: "Base Sepolia", hex: "0x14980" }, // 84532 in hex is 0x14980
+  { id: 8453, name: "Base", hex: "0x2105" }, // 8453 in hex is 0x2105
 ];
 
 const getAccount = async () => {
@@ -493,24 +494,35 @@ function App() {
   }, [account]);
 
   return (
+    // 追加
+    <ThirdwebProvider
+    activeChain="polygon" // または "polygon" や "base" など、使いたいチェーン
+    clientId="YOUR_THIRDWEB_CLIENT_ID" // ステップ 1 で取得したクライアント ID に置き換える
+    supportedWallets={[walletConnect()]}
+  >
     <div className="App d-flex flex-column">
       <div className="mb-auto w-100">
         <>
           <Navbar>
-            <Container>
-              <Navbar.Brand href="#home">
-                <img src={logo} width="250" />
-              </Navbar.Brand>
-              <Navbar.Toggle />
-              <Navbar.Collapse className="justify-content-end">
-                <Navbar.Text>
-                  <Button className="py-2 px-4 btn-lg" variant="outline-dark" id="GetAccountButton" onClick={initializeAccount}>
-                    MetaMaskに接続
-                  </Button>
-                </Navbar.Text>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
+          <Container>
+                <Navbar.Brand href="#home">
+                  <img src={logo} width="250" />
+                </Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                  <Navbar.Text>
+                    {/* MetaMask 接続ボタン (MetaMask がインストールされている場合のみ表示) */}
+                    {typeof window.ethereum !== 'undefined' && (
+                      <Button className="py-2 px-4 btn-lg me-2" variant="outline-dark" id="GetAccountButton" onClick={initializeAccount}>
+                        MetaMaskに接続
+                      </Button>
+                    )}
+                    {/* WalletConnect 接続ボタン */}
+                    <ConnectWallet btnTitle="WalletConnectで接続" />
+                  </Navbar.Text>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
           <Container className="my-1 p-1">
             <Navbar expand="lg">
               <Container className="mx-0 px-0">
@@ -683,10 +695,10 @@ function App() {
             )}
           </Container>
         </>
+        </div>
+        <footer className="mt-auto p-3">Ideated by Studymeter Inc.</footer>
       </div>
-
-      <footer className="mt-auto p-3">Ideated by Studymeter Inc.</footer>
-    </div>
+    </ThirdwebProvider>
   );
 }
 
